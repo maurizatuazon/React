@@ -22,11 +22,19 @@
   color: #61dafb;
 }
 
-.Recipe {
+.RecipeForm {
   text-align: left;
 }
 
-.Recipe span {
+.RecipeForm input{
+  margin-left: 50px;
+}
+
+.RecipeDetail {
+  text-align: left;
+}
+
+.RecipeDetail span {
   font-size: 20px;
 }
 
