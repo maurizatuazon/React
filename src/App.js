@@ -13,6 +13,7 @@ class App extends Component {
     super(props);
 
     this.handleSelectRecipe = this.handleSelectRecipe.bind(this);
+    this.handleAddRecipe = this.handleAddRecipe.bind(this);
 
     // hardcoded for now, this is ideally added from a form
     this.state = {
@@ -74,6 +75,11 @@ class App extends Component {
     });
   }
 
+  handleAddRecipe(event, recipe) {
+    this.setState({
+      recipes: this.state.recipes.push(recipe)
+    });
+  }
 
   render() {
     return (
@@ -92,7 +98,7 @@ class App extends Component {
         </header>
         <br />
         <div>
-          <RecipeForm />
+          <RecipeForm onAddRecipe={() => console.log(this.state)}/>
           <SplitPane
             left={
               <RecipeList recipes={this.state.recipes} selectRecipe={this.handleSelectRecipe} />}

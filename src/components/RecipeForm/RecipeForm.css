@@ -1,0 +1,15 @@
+.RecipeForm {
+    width: 80%;
+    margin: 50px 5%;
+  }
+  
+.RecipeForm__input {
+    margin-bottom: 20px;
+}
+
+.RecipeForm__input > label {
+    display: block;
+}
+
+
+  
