@@ -5,8 +5,8 @@ class RecipeForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipeTitle: '',
-            recipeDescription: '',
+            title: '',
+            description: '',
             ingredients: [],
             procedure: [],
             category: "Dinner",
@@ -18,6 +18,8 @@ class RecipeForm extends Component {
             ingredientsTemp: "",
             procedureTemp: ""
         };
+
+        this.baseState = this.state;
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +35,7 @@ class RecipeForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.onAddRecipe(this.state);
+        this.setState(this.baseState);
     }
 
     buildServingSizeOptions() {
@@ -62,19 +65,19 @@ class RecipeForm extends Component {
     render() {
         return (
             <div className="RecipeForm">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} ref="recipeForm">
                     <div className="RecipeForm__input">
-                        <label htmlFor="recipeTitle">Recipe Title:</label>
-                        <input name="recipeTitle" onChange={this.handleChange}
+                        <label htmlFor="title">Recipe Title:</label>
+                        <input name="title" onChange={this.handleChange}
                             type="text"
-                            value={this.state.recipeTitle}
+                            value={this.state.title}
                         />
                     </div>
                     <div className="RecipeForm__input">
-                        <label htmlFor="recipeDescription">Recipe Description:</label>
-                        <textarea name="recipeDescription" onChange={this.handleChange}
+                        <label htmlFor="description">Recipe Description:</label>
+                        <textarea name="description" onChange={this.handleChange}
                             type="text"
-                            value={this.state.recipeDescription}
+                            value={this.state.description}
                         />
                     </div>
                     <div className="RecipeForm__input">

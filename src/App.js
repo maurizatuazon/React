@@ -17,7 +17,21 @@ class App extends Component {
 
     // hardcoded for now, this is ideally added from a form
     this.state = {
-      recipe1: {
+      newRecipe: {
+          title: '',
+          description: '',
+          ingredients: [],
+          procedure: [],
+          category: "Dinner",
+          servingSize: 0,
+          timeUnit: "minutes",
+          prepTime: 0,
+          cookingTime: 0,
+          isFavorite: false,
+          ingredientsTemp: "",
+          procedureTemp: ""
+      },
+      recipes: [{
         recipeId: 0,
         title: "Recipe Title 1",
         description: "Recipe Description 1",
@@ -28,8 +42,7 @@ class App extends Component {
         prepTime: "20 mins",
         cookingTime: "30 mins",
         isFavorite: true
-      },
-      recipe2: {
+      },{
         recipeId: 1,
         title: "Recipe Title 2",
         description: "Recipe Description 2",
@@ -40,45 +53,39 @@ class App extends Component {
         prepTime: "20 mins",
         cookingTime: "30 mins",
         isFavorite: true
-      },
-      recipe3: {
-        recipeId: 2,
-        title: "Recipe Title 3",
-        description: "Recipe Description 3",
-        ingredients: ["1 cup sugar"],
-        procedure: ["Sample Step 1", "Sample Step 2"],
-        category: "Dessert",
-        servingSize: "5",
-        prepTime: "20 mins",
-        cookingTime: "30 mins",
-        isFavorite: true
-      },
-      recipes: [],
-      recipe: {}
+      }],
+      selectedRecipe: {},
+      
     };
   }
 
   componentDidMount() {
-    this.setState({ recipes: [this.state.recipe1, this.state.recipe2, this.state.recipe3], recipe: this.state.recipe1 });
-    console.log("state id = " + this.state.recipe.recipeId);
+    this.setState({ selectedRecipe: this.state.recipes[0] });
   }
 
   handleSelectRecipe(event) {
-    let recipeId = this.state.recipe.recipeId;
+    let recipeId = this.state.selectedRecipe.recipeId;
     if (event.currentTarget.dataset.id) {
       recipeId = event.currentTarget.dataset.id;
     }
 
-    this.setState({ recipe: this.state.recipes[recipeId] }, () => {
-      console.log(this.state.recipeId, ' recipeId');
-      console.log(this.state.recipe.recipeId, ' recipe recipeId');
-    });
+    this.setState({ selectedRecipe: this.state.recipes[recipeId] }, () => { console.log(this.state.selectedRecipe)});
+   
   }
 
-  handleAddRecipe(event, recipe) {
+  handleAddRecipe(newRecipe) {
+    let recipeId = 0;
+
+    if(this.state.recipes.length > 0) {
+      recipeId = Math.max.apply(Math, this.state.recipes.map(function(o) { return o.recipeId; })) + 1;
+    }
+
+    newRecipe.recipeId = recipeId;
+    var newData = this.state.recipes.concat([newRecipe]);  
     this.setState({
-      recipes: this.state.recipes.push(recipe)
-    });
+      recipes: newData,
+      newRecipe: {}
+    }, () => {console.log(this.state)});
   }
 
   render() {
@@ -98,12 +105,12 @@ class App extends Component {
         </header>
         <br />
         <div>
-          <RecipeForm onAddRecipe={() => console.log(this.state)}/>
+          <RecipeForm {...this.state.newRecipe} onAddRecipe={(newRecipe) => this.handleAddRecipe(newRecipe)}/>
           <SplitPane
             left={
               <RecipeList recipes={this.state.recipes} selectRecipe={this.handleSelectRecipe} />}
             right={
-              <RecipeDetail recipe={this.state.recipe} />
+              <RecipeDetail selectedRecipe={this.state.selectedRecipe} />
             } />
         </div>
       </div>

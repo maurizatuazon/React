@@ -3,13 +3,11 @@ import RecipePreview from '../../components/RecipePreview/RecipePreview';
 
 class RecipeList extends Component {
     render() {
-        let listItems = this.props.recipes.map((recipeItem, index) =>
-            <RecipePreview key={index} recipe={recipeItem} selectRecipe={this.props.selectRecipe} />
-        );
-
         return (
             <ul>
-                {listItems}
+                {this.props.recipes.map((recipeItem, index) =>
+                    <RecipePreview key={index} selectedRecipe={recipeItem} selectRecipe={this.props.selectRecipe} />
+            )}
             </ul>
         )
     }
