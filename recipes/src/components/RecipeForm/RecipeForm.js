@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './RecipeForm.css';
 
 class RecipeForm extends Component {
@@ -141,6 +142,13 @@ class RecipeForm extends Component {
             </div>
         );
     }
+}
+
+RecipeForm.propTypes = {
+    title: PropTypes.element.isRequired,
+    description: PropTypes.element.isRequired,
+    ingredients: PropTypes.element.isRequired,
+    procedure: PropTypes.element.isRequired
 }
 
 export default RecipeForm;
