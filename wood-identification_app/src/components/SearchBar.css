@@ -1,0 +1,13 @@
+.SearchBar {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 20px;
+  }
+  #searchbar-filepath {
+    width: 350px;
+  }
+  #searchbar-loading-btn,
+  #searchbar-cancel-btn {
+    height: 55px;
+    margin-left: 10px;
+  }

@@ -1,0 +1,16 @@
+.wood-info {
+    width: 300px;
+    margin-right: 35%;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.data-label{
+    font-weight: bold;
+    margin-bottom: 5px
+}
+
+.data-value{
+    margin-bottom: 20px
+}
